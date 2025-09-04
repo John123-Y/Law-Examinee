@@ -1,0 +1,11 @@
+html
+  head
+    title Make Payment
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    .container
+      h1 Make Payment
+      form(action='/api/payments/pay', method='POST')
+        input(type='number', name='amount', placeholder='Amount (NGN)', required)
+        input(type='text', name='type', value='premium_subscription', readonly)
+        button(type='submit') Pay Now

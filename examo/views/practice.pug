@@ -1,0 +1,22 @@
+html
+  head
+    title Practice Questions
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    .container
+      h1 Practice Questions
+      if questions
+        each question in questions
+          div
+            h3 #{question.question}
+            p Course: #{question.course.title}
+            ul
+              each option in question.options
+                li #{option}
+            form(action='/api/user/questions/submit', method='POST')
+              input(type='hidden', name='questionId', value=question._id)
+              input(type='text', name='selectedAnswer', placeholder='Your Answer', required)
+              input(type='number', name='timeTaken', placeholder='Time Taken (seconds)', required)
+              button(type='submit') Submit Answer
+      else
+        p No questions available.

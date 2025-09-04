@@ -1,0 +1,18 @@
+html
+  head
+    title Exam App - Home
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    .container
+      h1 Welcome to Exam App
+      p Prepare for WAEC and JAMB with our practice questions and analytics.
+      a(href='/practice') Start Practicing
+      if user
+        if user.isPremium
+          p Premium Member: Access all questions!
+        a(href='/analytics') View Analytics
+        if user.role === 'admin'
+          a(href='/admin') Admin Dashboard
+      else
+        a(href='/api/auth/login') Login
+        a(href='/api/auth/register') Register

@@ -1,0 +1,85 @@
+html
+  head
+    title Admin Dashboard
+    link(rel='stylesheet', href='/css/style.css')
+    script(src='https://cdn.jsdelivr.net/npm/chart.js')
+    script(src='/dist/admin.js', defer) // Updated path
+  body
+    .container
+      h1 Admin Dashboard
+      section#courses
+        h2 Manage Courses
+        button#newCourseBtn New Course
+        form#courseForm(style='display: none;', enctype='multipart/form-data')
+          input(type='text', name='title', placeholder='Course Title', required)
+          textarea(name='description', placeholder='Description', required)
+          input(type='file', name='image', accept='image/*', required)
+          button(type='submit') Save Course
+        table
+          thead
+            tr
+              th Title
+              th Description
+              th Image
+              th Actions
+          tbody
+            each course in courses
+              tr
+                td #{course.title}
+                td #{course.description}
+                td
+                  img(src=course.image, alt='Course Image', width='50')
+                td
+                  button.editCourse(data-id=course._id) Edit
+                  button.deleteCourse(data-id=course._id) Delete
+      section#questions
+        h2 Manage Questions
+        button#newQuestionBtn New Question
+        form#questionForm(style='display: none;')
+          input(type='text', name='course', placeholder='Course ID', required)
+          input(type='text', name='question', placeholder='Question', required)
+          input(type='text', name='options', placeholder='Options (comma-separated)', required)
+          input(type='text', name='correctAnswer', placeholder='Correct Answer', required)
+          textarea(name='caseStudy', placeholder='Case Study')
+          input(type='text', name='years', placeholder='Years (comma-separated)', required)
+          textarea(name='explanation', placeholder='Explanation', required)
+          input(type='checkbox', name='isPremium') Premium
+          input(type='datetime-local', name='releaseDate')
+          input(type='datetime-local', name='expiryDate')
+          button(type='submit') Save Question
+        table
+          thead
+            tr
+              th Question
+              th Course
+              th Actions
+          tbody
+            each question in questions
+              tr
+                td #{question.question}
+                td #{question.course.title}
+                td
+                  button.editQuestion(data-id=question._id) Edit
+                  button.deleteQuestion(data-id=question._id) Delete
+      section#exams
+        h2 Manage Exams
+        button#newExamBtn New Exam
+        form#examForm(style='display: none;')
+          input(type='text', name='course', placeholder='Course ID', required)
+          input(type='number', name='year', placeholder='Year', required)
+          textarea(name='rankings', placeholder='Rankings (JSON)', required)
+          button(type='submit') Save Exam
+        table
+          thead
+            tr
+              th Year
+              th Course
+              th Actions
+          tbody
+            each exam in exams
+              tr
+                td #{exam.year}
+                td #{exam.course.title}
+                td
+                  button.editExam(data-id=exam._id) Edit
+                  button.deleteExam(data-id=exam._id) Delete

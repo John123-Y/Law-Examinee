@@ -1,0 +1,16 @@
+html
+  head
+    title Performance Analytics
+    link(rel='stylesheet', href='/css/style.css')
+    script(src='https://cdn.jsdelivr.net/npm/chart.js')
+    script(src='/dist/analytics.js', defer) // Updated path
+  body
+    .container
+      h1 Performance Analytics
+      p Total Attempts: #{report.totalAttempts}
+      p Correct Answers: #{report.correctAnswers}
+      p Accuracy: #{report.totalAttempts ? Math.round((report.correctAnswers / report.totalAttempts) * 100) : 0}%
+      canvas#subjectChart
+      section#recommendations
+        h2 Recommended Topics
+        ul
